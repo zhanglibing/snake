@@ -1,10 +1,12 @@
 $(function(){
+	$('.go').addClass('active')
+	$('.go').on('click',function(){
+		$('.go').removeClass('active')
+		$('.door-left').addClass('active')
+		$('.door-right').addClass('active')
+	})
 	for (var i = 0; i <20; i++) {
 		for (var j = 0; j <20; j++) {
-		// var r=Math.floor(Math.random()*150)
-		// var g=Math.floor(Math.random()*150)
-		// var b=Math.floor(Math.random()*150)
-		// var color='rgba('+r+','+g+','+b+',0.3)'
 		$('<div>').attr('id',i+'_'+j).addClass('block').appendTo('.scence')
 		};
 		
@@ -27,6 +29,7 @@ $(function(){
     	  }
      
     }
+    var index=0;
     var shiwu=fangshiwu()
 	function move(){
 		var jiutou=she[she.length-1]
@@ -58,15 +61,14 @@ $(function(){
 	    if(xintou.x===shiwu.x&&xintou.y===shiwu.y){
 	    	finddiv(shiwu.x,shiwu.y).removeClass('food')
 	    	shiwu=fangshiwu()
+			index++;
+			$('.score span').text(index)
 	    }else{
 	    	var weiba=she.shift();
 	    	delete shebiao[weiba.x+'_'+weiba.y]
 	    	finddiv(weiba.x,weiba.y).removeClass('she')
-
 	    }
-			
 	}
-	 // var t=setInterval(move,200)
 		var direction="you"
 	$(document).on('keyup',function(e){
      var fanbiao={'zuo':37,'you':39,'shang':38,'xia':40}
